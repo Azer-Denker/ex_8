@@ -6,15 +6,15 @@ from django.utils.timezone import make_naive
 from django.views.generic import ListView, TemplateView, FormView
 
 from webapp.models import Tipe
-from .forms import TipeForm, BROWSER_DATETIME_FORMAT, SimpleSearchForm
-from .base_views import FormView as CustomFormView, ListView as CustomListView
+from webapp.forms import TipeForm, BROWSER_DATETIME_FORMAT, SimpleSearchForm
+from webapp.base_views import FormView as CustomFormView, ListView as CustomListView
 
 
 class IndexView(ListView):
-    template_name = 'index.html'
+    template_name = 'tipe/index.html'
     context_object_name = 'tipes'
     model = Tipe
-    paginate_by = 3
+    paginate_by = 5
     paginate_orphans = 0
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -36,7 +36,7 @@ class IndexView(ListView):
 
 
 class TipeView(TemplateView):
-    template_name = 'tipe_view.html'
+    template_name = 'tipe/view.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -49,7 +49,7 @@ class TipeView(TemplateView):
 
 
 class TipeCreateView(CustomFormView):
-    template_name = 'tipe_create.html'
+    template_name = 'tipe/create.html'
     form_class = TipeForm
 
     def form_valid(self, form):
@@ -61,7 +61,7 @@ class TipeCreateView(CustomFormView):
 
 
 class TipeUpdateView(FormView):
-    template_name = 'tipe_update.html'
+    template_name = 'tipe/update.html'
     form_class = TipeForm
 
     def dispatch(self, request, *args, **kwargs):
@@ -97,7 +97,7 @@ class TipeUpdateView(FormView):
 def tipe_delete_view(request, pk):
     tipe = get_object_or_404(Tipe, pk=pk)
     if request.method == 'GET':
-        return render(request, 'tipe_delete.html', context={'tipe': tipe})
+        return render(request, 'tipe/delete.html', context={'tipe': tipe})
     elif request.method == 'POST':
         tipe.delete()
         return redirect('index')

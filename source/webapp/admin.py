@@ -1,5 +1,5 @@
 from django.contrib import admin
-from webapp.models import Tipe, Tag, Status
+from webapp.models import Tipe, Tag, Status, Project
 
 
 class StatusAdmin(admin.ModelAdmin):
@@ -14,3 +14,4 @@ class TipeAdmin(admin.ModelAdmin):
 admin.site.register(Tipe, TipeAdmin)
 admin.site.register(Status, StatusAdmin)
 admin.site.register(Tag)
+admin.site.register(Project)

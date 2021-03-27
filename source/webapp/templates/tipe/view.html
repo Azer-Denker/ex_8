@@ -14,6 +14,7 @@
         <p>By: {{ tipe.author }} | {{ tipe.created_at|date:"d.m.Y H:i:s" }}</p>
         <p>Published at: {{ tipe.publish_at|date:"d.m.Y H:i:s" }}</p>
         <p>Tags: {% for tag in tipe.tags.all %}{{ tag.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+        <p>Project : {{ tipe.project_pk }}</p>
         <hr>
     </div>
 {% endblock %}
