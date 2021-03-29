@@ -15,14 +15,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from webapp.views import IndexView, TipeCreateView, TipeView, \
-    TipeUpdateView, tipe_delete_view
+from webapp.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', IndexView.as_view(), name='index'),
+    path('', PIndexView.as_view(), name='projects'),
+    path('projects/add/', ProjectCreateView.as_view(), name='project_create'),
+    path('project/<int:pk>/', ProjectView.as_view(), name='project_view'),
+    # # path('project/<int:pk>/update/', ProjectUpdateView.as_view(), name='project_update'),
+    # # path('project/<int:pk>/delete/', project_delete_view, name='project_delete'),
+    path('project/<int:pk>/tipes', TIndexView.as_view(), name='tipes'),
+    path('project/<int:pk>/tipes/add/', TipeCreateView.as_view(), name='tipe_create'),
     path('tipe/<int:pk>/', TipeView.as_view(), name='tipe_view'),
-    path('tipes/add/', TipeCreateView.as_view(), name='tipe_create'),
     path('tipe/<int:pk>/update/', TipeUpdateView.as_view(), name='tipe_update'),
     path('tipe/<int:pk>/delete/', tipe_delete_view, name='tipe_delete'),
 ]

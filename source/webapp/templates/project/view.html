@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}View{% endblock %}
+
+{% block menu %}
+    <li class="nav-item active">
+        <a class="nav-link" href="{% url 'tipe_create' project.pk %}">Добавить задачу</a>
+    </li>
+{% endblock %}
+{% block content %}
+    <h1>{{ project.name }}</h1>
+    <p class="description">Описание :{{ project.description }}</p>
+    {% if project.start_date %}<p>Дата начала: {{ project.start_date }}</p>{% endif %}
+    {% if project.finish_date %}<p>Дата окончания: {{ project.finish_date }}</p>{% endif %}
+    <h3>Задачи:</h3>
+    <div class="task-list">
+        {% if is_paginated %}
+            {% include 'partial/pagination.html' %}
+        {% endif %}
+        {% for tipe in project.projects.all %}
+            <div class="tipe">
+                <a href="{% url 'tipe_view' tipe.pk %}"> {{ tipe.title }} | {{ tipe.status }}</a>
+            </div>
+        {% empty %}
+            <p>Нет созданных задач.</p>
+        {% endfor %}
+    </div>
+{% endblock %}

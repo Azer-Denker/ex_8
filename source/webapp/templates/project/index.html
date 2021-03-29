@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block menu %}
+{% endblock %}
+{% block search %}
+{% endblock %}
+{% block content %}
+    {% if is_paginated %}
+        {% include 'partial/pagination.html' %}
+    {% endif %}
+    <h1>Projects: </h1>
+    {% csrf_token %}
+        {% for project in projects%}
+            <label>
+                <input class="ml-4" type="checkbox" name="id" value="{{ project.pk }}">
+            </label>
+            <a href="{% url 'project_view' project.pk %}"> {{ project.name }} | {{ project.description }}</a><br>
+    {% endfor %}
+    <input class=" btn btn-outline-dark btn-sm mb-1 mr-2" type="submit" value="Удалить">
+{% endblock %}

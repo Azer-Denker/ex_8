@@ -3,11 +3,9 @@ from django.core.exceptions import ValidationError
 from django.core.validators import BaseValidator
 from django.utils.deconstruct import deconstructible
 
-from .models import STATUS_CHOICES, Tipe, Tag
-
+from .models import STATUS_CHOICES, Tipe, Project
 
 default_status = STATUS_CHOICES[0][0]
-
 
 BROWSER_DATETIME_FORMAT = '%d.%m.%Y %H:%M'
 
@@ -42,7 +40,7 @@ class TipeForm(forms.ModelForm):
 
     class Meta:
         model = Tipe
-        fields = ['title', 'text', 'author', 'status', 'publish_at', 'tags', 'project_pk']
+        fields = ['title', 'text', 'author', 'status', 'publish_at', 'tags']
         widgets = {'tags': forms.CheckboxSelectMultiple}
 
     def clean(self):
@@ -62,3 +60,13 @@ class TipeForm(forms.ModelForm):
 
 class SimpleSearchForm(forms.Form):
     search = forms.CharField(max_length=100, required=False, label="Найти")
+
+
+class ProjectForm(forms.ModelForm):
+    class Meta:
+        model = Project
+        fields = ['start_date', 'finish_date', 'name', 'description']
+
+
+class ProjectDeleteForm(forms.Form):
+    title = forms.CharField(max_length=120, required=True, label='Введите название Проекта, чтобы удалить её')

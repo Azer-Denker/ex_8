@@ -3,14 +3,13 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseNotAllowed
 from django.urls import reverse
 from django.utils.timezone import make_naive
-from django.views.generic import ListView, TemplateView, FormView
+from django.views.generic import ListView, DetailView, FormView, CreateView
 
-from webapp.models import Tipe
+from webapp.models import Tipe, Project
 from webapp.forms import TipeForm, BROWSER_DATETIME_FORMAT, SimpleSearchForm
-from webapp.base_views import FormView as CustomFormView, ListView as CustomListView
 
 
-class IndexView(ListView):
+class TIndexView(ListView):
     template_name = 'tipe/index.html'
     context_object_name = 'tipes'
     model = Tipe
@@ -35,29 +34,30 @@ class IndexView(ListView):
         return data.order_by('-created_at')
 
 
-class TipeView(TemplateView):
+class TipeView(DetailView):
     template_name = 'tipe/view.html'
+    model = Tipe
+    template_name_field = "tipe"
+    #
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     tipe = self.object
+    #     project = tipe.project_pk.start_date('-start_date')
+    #     context['project'] = project
+    #     return context
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
 
-        pk = self.kwargs.get('pk')
-        tipe = get_object_or_404(Tipe, pk=pk)
-
-        context['tipe'] = tipe
-        return context
-
-
-class TipeCreateView(CustomFormView):
+class TipeCreateView(CreateView):
+    model = Tipe
     template_name = 'tipe/create.html'
     form_class = TipeForm
 
     def form_valid(self, form):
-        self.tipe = form.save()
-        return super().form_valid(form)
-
-    def get_redirect_url(self):
-        return reverse('tipe_view', kwargs={'pk': self.tipe.pk})
+        project = get_object_or_404(Project, pk=self.kwargs.get('pk'))
+        tipe = form.save(commit=False)
+        tipe.project_pk = project
+        tipe.save()
+        return redirect('tipe_view', pk=tipe.pk)
 
 
 class TipeUpdateView(FormView):
