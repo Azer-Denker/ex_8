@@ -1,6 +1,6 @@
 from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponseNotAllowed
+from django.http import HttpResponseNotAllowed, HttpResponseNotFound
 from django.urls import reverse, reverse_lazy
 from django.utils.timezone import make_naive
 from django.views.generic import ListView, DetailView, FormView, CreateView, UpdateView, DeleteView
@@ -38,6 +38,14 @@ class TipeView(DetailView):
     template_name = 'tipe/view.html'
     model = Tipe
     template_name_field = "tipe"
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        if self.object.project_pk.is_deleted:
+            return HttpResponseNotFound()
+
+        context = self.get_context_data(object=self.object)
+        return self.render_to_response(context)
     #
     # def get_context_data(self, **kwargs):
     #     context = super().get_context_data(**kwargs)

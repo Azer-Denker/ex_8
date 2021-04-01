@@ -1,4 +1,4 @@
-from django.http import HttpResponseNotAllowed
+from django.http import HttpResponseNotAllowed, HttpResponseNotFound
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.timezone import make_naive
 from django.http import HttpResponseRedirect
@@ -14,10 +14,23 @@ class PIndexView(ListView):
     model = Project
     context_object_name = 'projects'
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = queryset.filter(is_deleted=False)
+        return queryset
+
 
 class ProjectView(DetailView):
     template_name = 'project/view.html'
     model = Project
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        if self.object.is_deleted:
+            return HttpResponseNotFound()
+
+        context = self.get_context_data(object=self.object)
+        return self.render_to_response(context)
 
 
 class ProjectCreateView(CreateView):
@@ -43,3 +56,11 @@ class ProjectDeleteView(DeleteView):
     model = Project
     context_object_name = 'project'
     success_url = reverse_lazy('projects')
+
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        success_url = super().get_success_url()
+
+        self.object.is_deleted = True
+        self.object.save()
+        return HttpResponseRedirect(success_url)
