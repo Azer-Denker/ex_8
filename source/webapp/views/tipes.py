@@ -1,9 +1,9 @@
 from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseNotAllowed
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.utils.timezone import make_naive
-from django.views.generic import ListView, DetailView, FormView, CreateView, UpdateView
+from django.views.generic import ListView, DetailView, FormView, CreateView, UpdateView, DeleteView
 
 from webapp.models import Tipe, Project
 from webapp.forms import TipeForm, BROWSER_DATETIME_FORMAT, SimpleSearchForm
@@ -61,21 +61,19 @@ class TipeCreateView(CreateView):
 
 
 class TipeUpdateView(UpdateView):
-    model = Tipe
     template_name = 'tipe/update.html'
     form_class = TipeForm
-    context_key = 'tipe'
+    model = Tipe
 
-    def get_redirect_url(self):
+    def get_success_url(self):
         return reverse('tipe_view', kwargs={'pk': self.object.pk})
 
 
-def tipe_delete_view(request, pk):
-    tipe = get_object_or_404(Tipe, pk=pk)
-    if request.method == 'GET':
-        return render(request, 'tipe/delete.html', context={'tipe': tipe})
-    elif request.method == 'POST':
-        tipe.delete()
-        return redirect('index')
-    else:
-        return HttpResponseNotAllowed(permitted_methods=['GET', 'POST'])
+class TipeDeleteView(DeleteView):
+    template_name = 'tipe/delete.html'
+    model = Tipe
+    context_key = 'tipe'
+
+    def get_success_url(self):
+        return reverse('project_view', kwargs={'pk': self.object.project_pk.pk})
+
