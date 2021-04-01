@@ -5,6 +5,7 @@
 {% block menu %}
     <li class="nav-item active">
         <a class="nav-link" href="{% url 'tipe_create' project.pk %}">Добавить задачу</a>
+        <a href="{% url 'project_update' project.pk %}">Обновить</a>
     </li>
 {% endblock %}
 {% block content %}

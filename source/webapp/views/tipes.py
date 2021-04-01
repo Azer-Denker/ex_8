@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseNotAllowed
 from django.urls import reverse
 from django.utils.timezone import make_naive
-from django.views.generic import ListView, DetailView, FormView, CreateView
+from django.views.generic import ListView, DetailView, FormView, CreateView, UpdateView
 
 from webapp.models import Tipe, Project
 from webapp.forms import TipeForm, BROWSER_DATETIME_FORMAT, SimpleSearchForm
@@ -60,38 +60,14 @@ class TipeCreateView(CreateView):
         return redirect('tipe_view', pk=tipe.pk)
 
 
-class TipeUpdateView(FormView):
+class TipeUpdateView(UpdateView):
+    model = Tipe
     template_name = 'tipe/update.html'
     form_class = TipeForm
+    context_key = 'tipe'
 
-    def dispatch(self, request, *args, **kwargs):
-        self.tipe = self.get_object()
-        return super().dispatch(request, *args, **kwargs)
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['tipe'] = self.tipe
-        return context
-
-    def get_initial(self):
-        return {'publish_at': make_naive(self.tipe.publish_at)\
-            .strftime(BROWSER_DATETIME_FORMAT)}
-
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        kwargs['instance'] = self.tipe
-        return kwargs
-
-    def form_valid(self, form):
-        self.tipe = form.save()
-        return super().form_valid(form)
-
-    def get_success_url(self):
-        return reverse('tipe_view', kwargs={'pk': self.tipe.pk})
-
-    def get_object(self):
-        pk = self.kwargs.get('pk')
-        return get_object_or_404(Tipe, pk=pk)
+    def get_redirect_url(self):
+        return reverse('tipe_view', kwargs={'pk': self.object.pk})
 
 
 def tipe_delete_view(request, pk):
