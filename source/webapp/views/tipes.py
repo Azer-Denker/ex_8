@@ -65,6 +65,7 @@ class TipeCreateView(CreateView):
         tipe = form.save(commit=False)
         tipe.project_pk = project
         tipe.save()
+        form.save_m2m()
         return redirect('tipe_view', pk=tipe.pk)
 
 
