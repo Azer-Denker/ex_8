@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseNotAllowed, HttpResponseNotFound
@@ -55,7 +56,7 @@ class TipeView(DetailView):
     #     return context
 
 
-class TipeCreateView(CreateView):
+class TipeCreateView(LoginRequiredMixin, CreateView):
     model = Tipe
     template_name = 'tipe/create.html'
     form_class = TipeForm
@@ -69,7 +70,7 @@ class TipeCreateView(CreateView):
         return redirect('tipe_view', pk=tipe.pk)
 
 
-class TipeUpdateView(UpdateView):
+class TipeUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'tipe/update.html'
     form_class = TipeForm
     model = Tipe
@@ -78,7 +79,7 @@ class TipeUpdateView(UpdateView):
         return reverse('tipe_view', kwargs={'pk': self.object.pk})
 
 
-class TipeDeleteView(DeleteView):
+class TipeDeleteView(LoginRequiredMixin, DeleteView):
     template_name = 'tipe/delete.html'
     model = Tipe
     context_key = 'tipe'
