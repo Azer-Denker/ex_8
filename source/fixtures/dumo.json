@@ -1,0 +1,290 @@
+[
+{
+  "model": "webapp.tipe",
+  "pk": 2,
+  "fields": {
+    "project_pk": 1,
+    "title": "1231244124",
+    "text": "wrwqewqeqweqw",
+    "author": "Unknown",
+    "status": 1,
+    "created_at": "2021-03-24T10:19:54.706Z",
+    "updated_at": "2021-03-29T11:25:35.171Z",
+    "publish_at": "2021-05-20T10:19:00Z",
+    "tags": [
+      1,
+      2
+    ]
+  }
+},
+{
+  "model": "webapp.tipe",
+  "pk": 3,
+  "fields": {
+    "project_pk": 1,
+    "title": "dsghzrsjnxfj",
+    "text": "qwrfwedada",
+    "author": "Unknown",
+    "status": 1,
+    "created_at": "2021-03-24T10:20:29.883Z",
+    "updated_at": "2021-03-24T10:20:29.883Z",
+    "publish_at": "2021-03-01T10:20:00Z",
+    "tags": [
+      2,
+      3
+    ]
+  }
+},
+{
+  "model": "webapp.tipe",
+  "pk": 4,
+  "fields": {
+    "project_pk": 1,
+    "title": "wqrrqwdsadasdasda",
+    "text": "asdasdasdasdada",
+    "author": "AA",
+    "status": 2,
+    "created_at": "2021-03-24T10:20:46.771Z",
+    "updated_at": "2021-03-24T10:20:46.771Z",
+    "publish_at": "2021-03-23T08:46:00Z",
+    "tags": [
+      1,
+      2
+    ]
+  }
+},
+{
+  "model": "webapp.tipe",
+  "pk": 5,
+  "fields": {
+    "project_pk": 1,
+    "title": "qweqweqweee",
+    "text": "qweqweq",
+    "author": "qweqwe",
+    "status": 3,
+    "created_at": "2021-03-25T09:53:10.492Z",
+    "updated_at": "2021-03-25T09:53:10.492Z",
+    "publish_at": "2021-03-06T02:00:00Z",
+    "tags": [
+      3
+    ]
+  }
+},
+{
+  "model": "webapp.tipe",
+  "pk": 6,
+  "fields": {
+    "project_pk": 1,
+    "title": "qweqweqwe",
+    "text": "qwm;kasnaidnqwieqww",
+    "author": "Unknown",
+    "status": 2,
+    "created_at": "2021-03-25T09:54:00.982Z",
+    "updated_at": "2021-03-25T09:54:00.982Z",
+    "publish_at": "2020-04-10T12:00:00Z",
+    "tags": [
+      1
+    ]
+  }
+},
+{
+  "model": "webapp.tipe",
+  "pk": 7,
+  "fields": {
+    "project_pk": 1,
+    "title": "qweqwlj",
+    "text": "nlalasashdasudkdgghjhsdjhgjsgsdjhvjasdh",
+    "author": "Unknown",
+    "status": 1,
+    "created_at": "2021-03-25T09:54:30.486Z",
+    "updated_at": "2021-03-25T09:54:30.486Z",
+    "publish_at": "2021-03-25T09:54:00Z",
+    "tags": [
+      2
+    ]
+  }
+},
+{
+  "model": "webapp.tipe",
+  "pk": 8,
+  "fields": {
+    "project_pk": 1,
+    "title": "jbaskjbaskjdaskj",
+    "text": "jadhajhdgfhasdgfghdsa",
+    "author": "Unknown",
+    "status": 2,
+    "created_at": "2021-03-25T09:54:52.901Z",
+    "updated_at": "2021-03-25T09:54:52.901Z",
+    "publish_at": "2021-03-01T10:20:00Z",
+    "tags": [
+      1,
+      2
+    ]
+  }
+},
+{
+  "model": "webapp.tipe",
+  "pk": 9,
+  "fields": {
+    "project_pk": 1,
+    "title": "sdjabkdjaskdaskd",
+    "text": "ajsbdjhwvjdvqwgcvq",
+    "author": "Unknown",
+    "status": 2,
+    "created_at": "2021-03-25T09:55:08.141Z",
+    "updated_at": "2021-03-25T09:55:08.141Z",
+    "publish_at": "2021-03-21T12:00:00Z",
+    "tags": [
+      3
+    ]
+  }
+},
+{
+  "model": "webapp.tipe",
+  "pk": 10,
+  "fields": {
+    "project_pk": 1,
+    "title": "wqejkjasdkasjdva",
+    "text": "hagsgsg",
+    "author": "Unknown",
+    "status": 2,
+    "created_at": "2021-03-25T09:55:23.533Z",
+    "updated_at": "2021-03-27T10:12:02.242Z",
+    "publish_at": "2021-03-23T09:05:00Z",
+    "tags": [
+      2
+    ]
+  }
+},
+{
+  "model": "webapp.tipe",
+  "pk": 11,
+  "fields": {
+    "project_pk": 1,
+    "title": "dawewqeqwe",
+    "text": "qweqwrtqwe",
+    "author": "Unknown",
+    "status": 1,
+    "created_at": "2021-03-27T10:12:17.519Z",
+    "updated_at": "2021-03-27T10:12:17.519Z",
+    "publish_at": "2021-03-01T10:20:00Z",
+    "tags": [
+      1
+    ]
+  }
+},
+{
+  "model": "webapp.status",
+  "pk": 1,
+  "fields": {
+    "name": "new"
+  }
+},
+{
+  "model": "webapp.status",
+  "pk": 2,
+  "fields": {
+    "name": "In Progress"
+  }
+},
+{
+  "model": "webapp.status",
+  "pk": 3,
+  "fields": {
+    "name": "Done"
+  }
+},
+{
+  "model": "webapp.tag",
+  "pk": 1,
+  "fields": {
+    "name": "midl",
+    "created_at": "2021-03-24T10:15:35.387Z"
+  }
+},
+{
+  "model": "webapp.tag",
+  "pk": 2,
+  "fields": {
+    "name": "hard",
+    "created_at": "2021-03-24T10:15:39.046Z"
+  }
+},
+{
+  "model": "webapp.tag",
+  "pk": 3,
+  "fields": {
+    "name": "easy",
+    "created_at": "2021-03-24T10:16:15.353Z"
+  }
+},
+{
+  "model": "webapp.project",
+  "pk": 1,
+  "fields": {
+    "start_date": "2021-03-27",
+    "finish_date": null,
+    "name": "Onew",
+    "description": "vdvdvdvd",
+    "is_deleted": true
+  }
+},
+{
+  "model": "webapp.project",
+  "pk": 2,
+  "fields": {
+    "start_date": "2021-03-27",
+    "finish_date": null,
+    "name": "eqweqwr",
+    "description": "weqeweeqweqw",
+    "is_deleted": false
+  }
+},
+{
+  "model": "webapp.project",
+  "pk": 4,
+  "fields": {
+    "start_date": "2021-03-27",
+    "finish_date": null,
+    "name": "qweqweqwe",
+    "description": "qweqweqwe",
+    "is_deleted": false
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$Iq4ldgx6UJjw$yyH70UUdRWtJB05vTQFE8Bk/zTJmVM7bkfAfa9tc6jk=",
+    "last_login": "2021-04-12T12:08:57.731Z",
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2021-03-24T10:15:12.141Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$TnXPvsZbh19V$J1EzcJCyi+YL6G+eYtdRAFZttFfMRB8jZVeStJ6TlhQ=",
+    "last_login": "2021-04-12T12:11:34.645Z",
+    "is_superuser": false,
+    "username": "qwe",
+    "first_name": "\u0439\u0446\u0443",
+    "last_name": "",
+    "email": "qwe@g.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2021-04-12T12:11:34.385Z",
+    "groups": [],
+    "user_permissions": []
+  }
+}
+]
