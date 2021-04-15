@@ -1,20 +1,32 @@
 {% extends 'base.html' %}
-
+{% load staticfiles %}
 {% block title %}View{% endblock %}
+<li class="nav-item active">
 
-{% block menu %}
-    <li><a href="{% url 'tipe_update' tipe.pk %}">Update</a></li>
-    <li><a href="{% url 'tipe_delete' tipe.pk %}">Delete</a></li>
-{% endblock %}
+    {% block menu %}
+        {% if perms.webapp.change_tipe %}
+            <a class="nav-link" href="{% url 'tipe_update' tipe.pk %}">Update</a>
+        {% endif %}
+        {% if perms.webapp.delete_tipe %}
+            <a class="nav-link" href="{% url 'tipe_delete' tipe.pk %}"">Delete</a>
+        {% endif %}
 
+    {% endblock %}
+</li>
 {% block content %}
     <div class="box">
-        <h1>{{ tipe.title }}</h1>
-        <p class="pre">{{ tipe.text }}</p>
+        <h1>Title: {{ tipe.title }}</h1>
+        <p class="pre">text: {{ tipe.text }}</p>
         <p>By: {{ tipe.author }} | {{ tipe.created_at|date:"d.m.Y H:i:s" }}</p>
         <p>Published at: {{ tipe.publish_at|date:"d.m.Y H:i:s" }}</p>
         <p>Tags: {% for tag in tipe.tags.all %}{{ tag.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
-        <p>Project : {{ tipe.project_pk }}</p>
+        <p>Project № {{ tipe.project_pk }}</p>
+        {% if tipe.tipe_team %}
+            <h4>Команда:</h4>
+            {% for member in tipe.tipe_team.all %}
+                <p> >>>> {{ member.username }}</p>
+            {% endfor %}
+        {% endif %}
         <hr>
     </div>
 {% endblock %}

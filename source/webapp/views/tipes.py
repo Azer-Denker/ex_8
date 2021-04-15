@@ -1,4 +1,4 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseNotAllowed, HttpResponseNotFound
@@ -56,10 +56,14 @@ class TipeView(DetailView):
     #     return context
 
 
-class TipeCreateView(LoginRequiredMixin, CreateView):
+class TipeCreateView(PermissionRequiredMixin, CreateView):
     model = Tipe
     template_name = 'tipe/create.html'
     form_class = TipeForm
+    permission_required = 'webapp.add_tipe'
+
+    def has_permission(self):
+        return self.request.user.is_superuser or self.request.user in Project.objects.get(pk=self.kwargs.get('pk')).project_team.all() and super().has_permission()
 
     def form_valid(self, form):
         project = get_object_or_404(Project, pk=self.kwargs.get('pk'))
@@ -70,19 +74,27 @@ class TipeCreateView(LoginRequiredMixin, CreateView):
         return redirect('tipe_view', pk=tipe.pk)
 
 
-class TipeUpdateView(LoginRequiredMixin, UpdateView):
+class TipeUpdateView(PermissionRequiredMixin, UpdateView):
     template_name = 'tipe/update.html'
     form_class = TipeForm
     model = Tipe
+    permission_required = 'webapp.change_tipe'
+
+    def has_permission(self):
+        return self.request.user.is_superuser or self.request.user in Project.objects.get(pk=self.kwargs.get('pk')).project_team.all() and super().has_permission()
 
     def get_success_url(self):
         return reverse('tipe_view', kwargs={'pk': self.object.pk})
 
 
-class TipeDeleteView(LoginRequiredMixin, DeleteView):
+class TipeDeleteView(PermissionRequiredMixin, DeleteView):
     template_name = 'tipe/delete.html'
     model = Tipe
     context_key = 'tipe'
+    permission_required = 'webapp.delete_tipe'
+
+    def has_permission(self):
+        return self.request.user.is_superuser or self.request.user in Project.objects.get(pk=self.kwargs.get('pk')).project_team.all() and super().has_permission()
 
     def get_success_url(self):
         return reverse('project_view', kwargs={'pk': self.object.project_pk.pk})

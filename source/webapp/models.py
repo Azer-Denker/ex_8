@@ -1,7 +1,8 @@
+from django.contrib.auth import get_user_model
 from django.core.validators import MinLengthValidator
 from django.db import models
 from django.utils import timezone
-
+from django.contrib.auth.models import User
 
 STATUS_CHOICES = [
     ('new', 'новый'),
@@ -16,9 +17,11 @@ class Tipe(models.Model):
     title = models.CharField(max_length=200, null=False, blank=False, verbose_name='Заголовок',
                              validators=[MinLengthValidator(5)])
     text = models.TextField(max_length=3000, null=False, blank=False, verbose_name='Текст')
-    author = models.CharField(max_length=40, null=False, blank=False, default='Unknown', verbose_name='Автор')
+    author = models.ForeignKey(get_user_model(), on_delete=models.SET_DEFAULT, default=1, related_name='project',
+                               verbose_name='Автор')
     status = models.ForeignKey('webapp.Status', related_name='status', on_delete=models.PROTECT, verbose_name='Статус')
     tags = models.ManyToManyField('webapp.Tag', verbose_name='Теги', blank=True, related_name='tags')
+    tipe_team = models.ManyToManyField(User, related_name='tipes', verbose_name='Команда')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Время изменения')
     publish_at = models.DateTimeField(verbose_name="Время публикации", blank=True, default=timezone.now)
@@ -59,6 +62,7 @@ class Project(models.Model):
     finish_date = models.DateField(null=True, blank=True, verbose_name='Дата окончания')
     name = models.CharField(max_length=200, null=False, blank=False, verbose_name='Название')
     description = models.TextField(max_length=3000, null=True, blank=True, verbose_name='Описание')
+    project_team = models.ManyToManyField(User, related_name='projects', verbose_name='Команда')
     is_deleted = models.BooleanField(default=False)
 
     def __str__(self):

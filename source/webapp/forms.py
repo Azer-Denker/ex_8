@@ -40,7 +40,7 @@ class TipeForm(forms.ModelForm):
 
     class Meta:
         model = Tipe
-        fields = ['title', 'text', 'author', 'status', 'publish_at', 'tags']
+        fields = ['title', 'text', 'author', 'status', 'tipe_team', 'publish_at', 'tags']
         widgets = {'tags': forms.CheckboxSelectMultiple}
 
     def clean(self):
@@ -65,7 +65,7 @@ class SimpleSearchForm(forms.Form):
 class ProjectForm(forms.ModelForm):
     class Meta:
         model = Project
-        fields = ['start_date', 'finish_date', 'name', 'description']
+        fields = ['start_date', 'finish_date', 'name', 'description', 'project_team']
 
 
 class ProjectDeleteForm(forms.Form):

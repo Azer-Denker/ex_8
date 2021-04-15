@@ -1,19 +1,32 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 {% block title %}View{% endblock %}
+<li class="nav-item active">
 
-{% block menu %}
-    <li class="nav-item active">
-        <a class="nav-link" href="{% url 'tipe_create' project.pk %}">Добавить задачу</a>
-        <a href="{% url 'project_update' project.pk %}">Обновить</a>
-        <a href="{% url 'project_delete' project.pk %}">Удалить</a>
-    </li>
-{% endblock %}
+    {% block menu %}
+        {% if perms.webapp.add_tipe %}
+            <a class="nav-link" href="{% url 'tipe_create' project.pk %}">Добавить задачу</a>
+        {% endif %}
+        {% if perms.webapp.change_project %}
+            <a href="{% url 'project_update' project.pk %}">Обновить</a>
+        {% endif %}
+        {% if perms.webapp.delete_project %}
+            <a href="{% url 'project_delete' project.pk %}">Удалить</a>
+        {% endif %}
+
+    {% endblock %}
+</li>
 {% block content %}
-    <h1>{{ project.name }}</h1>
+    <h1>Проект: {{ project.name }}</h1>
     <p class="description">Описание :{{ project.description }}</p>
     {% if project.start_date %}<p>Дата начала: {{ project.start_date }}</p>{% endif %}
     {% if project.finish_date %}<p>Дата окончания: {{ project.finish_date }}</p>{% endif %}
+    {% if project.project_team %}
+        <h4>Команда:</h4>
+        {% for member in project.project_team.all %}
+            <p> >>>> {{ member.username }}</p>
+        {% endfor %}
+    {% endif %}
     <h3>Задачи:</h3>
     <div class="task-list">
         {% if is_paginated %}
