@@ -21,7 +21,6 @@ class Tipe(models.Model):
                                verbose_name='Автор')
     status = models.ForeignKey('webapp.Status', related_name='status', on_delete=models.PROTECT, verbose_name='Статус')
     tags = models.ManyToManyField('webapp.Tag', verbose_name='Теги', blank=True, related_name='tags')
-    tipe_team = models.ManyToManyField(User, related_name='tipes', verbose_name='Команда')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Время изменения')
     publish_at = models.DateTimeField(verbose_name="Время публикации", blank=True, default=timezone.now)

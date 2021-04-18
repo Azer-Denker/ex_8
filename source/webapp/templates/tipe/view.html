@@ -21,12 +21,6 @@
         <p>Published at: {{ tipe.publish_at|date:"d.m.Y H:i:s" }}</p>
         <p>Tags: {% for tag in tipe.tags.all %}{{ tag.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
         <p>Project № {{ tipe.project_pk }}</p>
-        {% if tipe.tipe_team %}
-            <h4>Команда:</h4>
-            {% for member in tipe.tipe_team.all %}
-                <p> >>>> {{ member.username }}</p>
-            {% endfor %}
-        {% endif %}
         <hr>
     </div>
 {% endblock %}

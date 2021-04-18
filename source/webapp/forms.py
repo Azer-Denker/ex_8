@@ -40,7 +40,7 @@ class TipeForm(forms.ModelForm):
 
     class Meta:
         model = Tipe
-        fields = ['title', 'text', 'author', 'status', 'tipe_team', 'publish_at', 'tags']
+        fields = ['title', 'text', 'author', 'status', 'publish_at', 'tags']
         widgets = {'tags': forms.CheckboxSelectMultiple}
 
     def clean(self):
