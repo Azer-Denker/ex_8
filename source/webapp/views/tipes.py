@@ -63,7 +63,8 @@ class TipeCreateView(PermissionRequiredMixin, CreateView):
     permission_required = 'webapp.add_tipe'
 
     def has_permission(self):
-        return self.request.user.is_superuser or self.request.user in Project.objects.get(pk=self.kwargs.get('pk')).project_team.all() and super().has_permission()
+        return self.request.user.is_superuser or self.request.user in Project.objects.get(
+            pk=self.kwargs.get('pk')).projects.all() and super().has_permission()
 
     def form_valid(self, form):
         project = get_object_or_404(Project, pk=self.kwargs.get('pk'))
@@ -81,7 +82,7 @@ class TipeUpdateView(PermissionRequiredMixin, UpdateView):
     permission_required = 'webapp.change_tipe'
 
     def has_permission(self):
-        return self.request.user.is_superuser or self.request.user in Project.objects.get(pk=self.kwargs.get('pk')).project_team.all() and super().has_permission()
+        return self.request.user.is_superuser or self.request.user in self.get_object().project_team.projects.all() and super().has_permission()
 
     def get_success_url(self):
         return reverse('tipe_view', kwargs={'pk': self.object.pk})
@@ -94,7 +95,8 @@ class TipeDeleteView(PermissionRequiredMixin, DeleteView):
     permission_required = 'webapp.delete_tipe'
 
     def has_permission(self):
-        return self.request.user.is_superuser or self.request.user in Project.objects.get(pk=self.kwargs.get('pk')).project_team.all() and super().has_permission()
+        return self.request.user.is_superuser or self.request.user in Project.objects.get(
+            pk=self.kwargs.get('pk')).project_team.all() and super().has_permission()
 
     def get_success_url(self):
         return reverse('project_view', kwargs={'pk': self.object.project_pk.pk})
