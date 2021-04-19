@@ -25,7 +25,10 @@
                         <li><a href="{% url 'project_create' %}">Создать Проект</a></li>
                   {% endif %}
                 {% block menu %}{% endblock %}
-                    <li><a href="#">Привет, {{ request.user.get_full_name|default:request.user.username }}</a></li>
+                    <li><a href="{% url 'accounts:detail' user.pk %}?next=">Привет, {{ request.user.get_full_name|default:request.user.username }}</a></li>
+                    {% if perms.accounts.can_watch_users %}
+                        <li><a href="{% url 'accounts:users_list' %}?next={{ request.get_full_path }}">Users List</a></li>
+                    {% endif %}
                     <li><a href="{% url 'accounts:logout' %}?next={{ request.get_full_path }}">Logout</a></li>
                 {% else %}
                     <li><a href="{% url 'accounts:login' %}?next={{ request.get_full_path }}">Login</a></li>

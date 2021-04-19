@@ -5,51 +5,15 @@
   "fields": {
     "name": "Project Manager",
     "permissions": [
-      [
-        "can_watch_users",
-        "accounts",
-        "profile"
-      ],
-      [
-        "add_project",
-        "webapp",
-        "project"
-      ],
-      [
-        "change_project",
-        "webapp",
-        "project"
-      ],
-      [
-        "delete_project",
-        "webapp",
-        "project"
-      ],
-      [
-        "view_project",
-        "webapp",
-        "project"
-      ],
-      [
-        "add_tipe",
-        "webapp",
-        "tipe"
-      ],
-      [
-        "change_tipe",
-        "webapp",
-        "tipe"
-      ],
-      [
-        "delete_tipe",
-        "webapp",
-        "tipe"
-      ],
-      [
-        "view_tipe",
-        "webapp",
-        "tipe"
-      ]
+      46,
+      37,
+      38,
+      39,
+      40,
+      29,
+      30,
+      31,
+      32
     ]
   }
 },
@@ -59,36 +23,12 @@
   "fields": {
     "name": "Team Lead",
     "permissions": [
-      [
-        "can_watch_users",
-        "accounts",
-        "profile"
-      ],
-      [
-        "change_project",
-        "webapp",
-        "project"
-      ],
-      [
-        "add_tipe",
-        "webapp",
-        "tipe"
-      ],
-      [
-        "change_tipe",
-        "webapp",
-        "tipe"
-      ],
-      [
-        "delete_tipe",
-        "webapp",
-        "tipe"
-      ],
-      [
-        "view_tipe",
-        "webapp",
-        "tipe"
-      ]
+      46,
+      38,
+      29,
+      30,
+      31,
+      32
     ]
   }
 },
@@ -98,26 +38,10 @@
   "fields": {
     "name": "Developer",
     "permissions": [
-      [
-        "add_tipe",
-        "webapp",
-        "tipe"
-      ],
-      [
-        "change_tipe",
-        "webapp",
-        "tipe"
-      ],
-      [
-        "delete_tipe",
-        "webapp",
-        "tipe"
-      ],
-      [
-        "view_tipe",
-        "webapp",
-        "tipe"
-      ]
+      29,
+      30,
+      31,
+      32
     ]
   }
 },
@@ -154,16 +78,10 @@
     "is_active": true,
     "date_joined": "2021-04-15T06:38:12Z",
     "groups": [
-      [
-        "Developer"
-      ]
+      3
     ],
     "user_permissions": [
-      [
-        "view_project",
-        "webapp",
-        "project"
-      ]
+      40
     ]
   }
 },
@@ -182,16 +100,10 @@
     "is_active": true,
     "date_joined": "2021-04-15T06:42:45Z",
     "groups": [
-      [
-        "Team Lead"
-      ]
+      2
     ],
     "user_permissions": [
-      [
-        "view_project",
-        "webapp",
-        "project"
-      ]
+      40
     ]
   }
 },
@@ -210,16 +122,10 @@
     "is_active": true,
     "date_joined": "2021-04-15T06:43:20Z",
     "groups": [
-      [
-        "Project Manager"
-      ]
+      1
     ],
     "user_permissions": [
-      [
-        "view_project",
-        "webapp",
-        "project"
-      ]
+      40
     ]
   }
 }
