@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 
 {% block title %}Пользователь{% endblock %}
+{% block menu %}
+    <li><a href="{% url "accounts:user_change" user_obj.pk %}">Редактирование личных данных</a></li>
+    <li><a href="{% url "accounts:password_change" %}">Поменять пароль</a></li>
+{% endblock %}
 
 {% block content %}
     <h1>Личная страница пользователя {{ user_obj.get_full_name|default:user_obj.username }}</h1>

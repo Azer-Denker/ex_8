@@ -2,8 +2,12 @@ body {
     font-family: Arial, sans-serif;
     font-size: 16px;
     color: #444444;
-    /* отступ, чтобы компенсировать высоту навбара */
     margin-top: 60px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
 }
 
 .container {
@@ -105,7 +109,7 @@ body {
     text-align: center;
 }
 
-.pagination a, .pagination .page-disabled {
+.pagination a, .pagination .page-disabled, .mass-actions input {
     display: inline-block;
     border: solid 1px #6a7ddd;
     border-radius: 3px;
@@ -113,13 +117,13 @@ body {
     margin: 3px;
 }
 
-.pagination a {
+.pagination a, .mass-actions input {
     background: #6a7ddd;
     color: white;
     text-decoration: none;
 }
 
-.pagination a:hover {
+.pagination a:hover, .mass-actions input:hover {
     background: #6a7dff;
     text-decoration: underline;
 }
@@ -148,4 +152,64 @@ body {
     border-radius: 10px;
     margin: 10px;
     padding: 10px;
+}
+
+.mass-actions {
+    text-align: right;
+}
+
+input[type='submit']:hover {
+    cursor: pointer;
+}
+
+.cart-table th,
+.cart-table td {
+    border: solid 1px gray;
+    padding: 5px 10px;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.message {
+    border-radius: 5px;
+    border: solid 1px;
+    padding: 5px 10px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.message:first-child {
+    margin-top: 0;
+}
+
+.message-error {
+    background: rgba(255, 0, 0, 0.15);
+    border-color: darkred;
+    color: darkred;
+}
+
+.message-warning {
+    background: rgba(255, 255, 0, 0.15);
+    border-color: goldenrod;
+    color: goldenrod;
+}
+
+.message-success {
+    background: rgba(0, 255, 0, 0.15);
+    border-color: green;
+    color: green;
+}
+
+.message-info {
+    background: rgba(0, 0, 255, 0.15);
+    border-color: darkblue;
+    color: darkblue;
+}
+
+.message-default {
+    background: rgba(0, 0, 0, 0.15);
+    border-color: #444444;
+    color: #444444;
 }
