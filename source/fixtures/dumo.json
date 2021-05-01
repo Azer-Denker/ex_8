@@ -1,0 +1,155 @@
+[
+{
+  "model": "webapp.product",
+  "pk": 3,
+  "fields": {
+    "name": "midl",
+    "category": "Other",
+    "description": "",
+    "pic": ""
+  }
+},
+{
+  "model": "webapp.product",
+  "pk": 4,
+  "fields": {
+    "name": "QWEQ",
+    "category": "Food",
+    "description": "",
+    "pic": ""
+  }
+},
+{
+  "model": "webapp.product",
+  "pk": 5,
+  "fields": {
+    "name": "qwe",
+    "category": "Food",
+    "description": "",
+    "pic": ""
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$ufe1K7DLp2Cx$z3MwSUvhcLXXk/0L4S4jye+om+ZXmPQ0sJvh7NwRrGE=",
+    "last_login": "2021-05-01T11:59:27.689Z",
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "",
+    "last_name": "",
+    "email": "admin@ad.min",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2021-04-30T16:10:34Z",
+    "groups": [
+      1
+    ],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$mDGDxNhCUMXu$dPPmZ+GfTwXaLVWIbha7IrVN4Y3ShIYGm9Cb+aYJems=",
+    "last_login": "2021-05-01T11:26:41.211Z",
+    "is_superuser": false,
+    "username": "Moderator",
+    "first_name": "Moderator",
+    "last_name": "",
+    "email": "Moderator@mod.erators",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2021-05-01T10:18:16Z",
+    "groups": [
+      1
+    ],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 3,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$PBfw0h1EzCpk$iLTmiIwBzeSnliKONMTMUhyVrdYol5OpyVCG1tQQlps=",
+    "last_login": "2021-05-01T11:24:43.498Z",
+    "is_superuser": false,
+    "username": "user",
+    "first_name": "user",
+    "last_name": "",
+    "email": "user@us.er",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2021-05-01T10:19:31.034Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "webapp.review",
+  "pk": 7,
+  "fields": {
+    "author": 1,
+    "product": 3,
+    "text": "cjghcjgc",
+    "mark": 1,
+    "status": true,
+    "created_at": "2021-05-01T08:05:40.981Z",
+    "updated_at": "2021-05-01T08:05:40.981Z"
+  }
+},
+{
+  "model": "webapp.review",
+  "pk": 8,
+  "fields": {
+    "author": 1,
+    "product": 4,
+    "text": "wqeqwe",
+    "mark": 4,
+    "status": true,
+    "created_at": "2021-05-01T08:15:26.523Z",
+    "updated_at": "2021-05-01T08:15:26.523Z"
+  }
+},
+{
+  "model": "webapp.review",
+  "pk": 9,
+  "fields": {
+    "author": 1,
+    "product": 3,
+    "text": "jgu",
+    "mark": 3,
+    "status": true,
+    "created_at": "2021-05-01T09:21:29.837Z",
+    "updated_at": "2021-05-01T09:21:29.837Z"
+  }
+},
+{
+  "model": "webapp.review",
+  "pk": 11,
+  "fields": {
+    "author": 2,
+    "product": 3,
+    "text": "qweqwe",
+    "mark": 4,
+    "status": false,
+    "created_at": "2021-05-01T11:11:49.421Z",
+    "updated_at": "2021-05-01T11:11:49.422Z"
+  }
+},
+{
+  "model": "webapp.review",
+  "pk": 12,
+  "fields": {
+    "author": 3,
+    "product": 3,
+    "text": "qwe",
+    "mark": 3,
+    "status": false,
+    "created_at": "2021-05-01T11:19:11.079Z",
+    "updated_at": "2021-05-01T11:19:11.079Z"
+  }
+}
+]
