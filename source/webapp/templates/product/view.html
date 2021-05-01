@@ -26,7 +26,17 @@
             <div class="review">
                 <b>Автор: </b><a href="{% url 'accounts:detail' review.author.pk %}?next=">{{ review.author.get_full_name }}</a>
                 <p><b>Емайл: </b>{{ review.author.email }}</p>
-                <p><b>Оценка: </b>{{ review.mark }}</p>
+                {% if review.mark <= 1%}
+                    <p><b>Оценка: </b><img class="star" src="../../static/pic/star.jpeg" style="width: 25px;"></p>
+                {% elif review.mark <= 2%}
+                    <p><b>Оценка: </b><img class="star" src="../../static/pic/star.jpeg" style="width: 25px;"><img class="star" src="../../static/pic/star.jpeg" style="width: 25px;"></p>
+                {% elif review.mark <= 3%}
+                    <p><b>Оценка: </b><img class="star" src="../../static/pic/star.jpeg" style="width: 25px;"><img class="star" src="../../static/pic/star.jpeg" style="width: 25px;"><img class="star" src="../../static/pic/star.jpeg" style="width: 25px;"></p>
+                {% elif review.mark <= 4%}
+                    <p><b>Оценка: </b><img class="star" src="../../static/pic/star.jpeg" style="width: 25px;"><img class="star" src="../../static/pic/star.jpeg" style="width: 25px;"><img class="star" src="../../static/pic/star.jpeg" style="width: 25px;"><img class="star" src="../../static/pic/star.jpeg" style="width: 25px;"></p>
+                {% elif review.mark <= 5%}
+                    <p><b>Оценка: </b><img class="star" src="../../static/pic/star.jpeg" style="width: 25px;"><img class="star" src="../../static/pic/star.jpeg" style="width: 25px;"><img class="star" src="../../static/pic/star.jpeg" style="width: 25px;"><img class="star" src="../../static/pic/star.jpeg" style="width: 25px;"><img class="star" src="../../static/pic/star.jpeg" style="width: 25px;"></p>
+                {% endif %}
                 <p><b>Отзыв: </b>{{ review.text }}</p>
                 {% if perms.webapp.change_review or review.author == request.user %}
                     <a href="{% url 'review_update' review.pk %}"><i class="fas fa-edit"></i></a>
