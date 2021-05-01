@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block menu %}
+{% endblock %}
+{% block search %}
+{% endblock %}
+{% block content %}
+    <h1>Продукты: </h1>
+    {% for product in products%}
+        {% if product.pic %}
+            <img class="avatar" src="{{ product.pic.url }}" width="150" height="150" alt="product picture">
+        {% else %}
+            <img class="avatar" src="{% static 'pic/plug.jpeg' %}" width="150" height="150" alt="product picture">
+        {% endif %}
+        <br>
+        <a href="{% url 'product_view' product.pk %}"> {{ product.name }} | Ср.оц.: {{ product.get_mark|default_if_none:0 }}</a>
+        <br>
+        <hr>
+    {% endfor %}
+{% endblock %}

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from webapp.models import Tipe, Tag, Status, Project
+from webapp.models import Product, Review
 
 
 class StatusAdmin(admin.ModelAdmin):
@@ -7,11 +7,5 @@ class StatusAdmin(admin.ModelAdmin):
     fields = ['name']
 
 
-class TipeAdmin(admin.ModelAdmin):
-    filter_horizontal = ('tags',)
-
-
-admin.site.register(Tipe, TipeAdmin)
-admin.site.register(Status, StatusAdmin)
-admin.site.register(Tag)
-admin.site.register(Project)
+admin.site.register(Product)
+admin.site.register(Review)

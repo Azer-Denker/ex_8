@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+
+{% block title %}View{% endblock %}
+<li class="nav-item active">
+
+    {% block menu %}
+            <a class="nav-link" href="{% url 'review_create' product.pk %}">Добавить отзыв</a>
+        {% if perms.webapp.change_product %}
+            <a href="{% url 'product_update' product.pk %}">Обновить</a>
+        {% endif %}
+        {% if perms.webapp.delete_product %}
+            <a href="{% url 'product_delete' product.pk %}">Удалить</a>
+        {% endif %}
+
+    {% endblock %}
+</li>
+{% block content %}
+    <h1>Продукт: {{ product.name }}</h1>
+    <p class="description">Описание :{{ product.description }}</p>
+    <p>Средняя оценка: {{ product.get_mark|default_if_none:0 }}</p>
+    <h3>Отзывы:</h3>
+    <hr>
+    <div class="task-list">
+        {% for review in product.product_review.all %}
+            <div class="review">
+                <b>Автор: </b><a href="{% url 'accounts:detail' review.author.pk %}?next=">{{ review.author.get_full_name }}</a>
+                <p><b>Емайл: </b>{{ review.author.email }}</p>
+                <p><b>Оценка: </b>{{ review.mark }}</p>
+                <p><b>Отзыв: </b>{{ review.text }}</p>
+                {% if perms.webapp.change_review or review.author == request.user %}
+                    <a href="{% url 'review_update' review.pk %}"><i class="fas fa-edit"></i></a>
+                {% endif %}
+                {% if perms.webapp.delete_review or review.author == request.user %}
+                    <a href="{% url 'review_delete' review.pk %}"><i class="fas fa-trash"></i></a>
+                {% endif %}
+                <hr>
+            </div>
+        {% empty %}
+            <p>Нет созданных отзывов.</p>
+        {% endfor %}
+    </div>
+{% endblock %}

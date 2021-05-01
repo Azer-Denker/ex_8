@@ -5,11 +5,9 @@ Delete Project
 {% block content %}
 <h1>Вы уверены, что хотите удалить статью "{{ object.description }}"</h1>
     <p>{{ object.title }}</p>
-    <p>Дата начала: {{ object.begin_date }}</p>
-    <p>Дата окончания: {{ object.end_date }}</p>
-    <form method="POST" action="{% url 'project_delete' object.pk%}">
+    <form method="POST" action="{% url 'product_delete' object.pk%}">
         {% csrf_token %}
         <button type="submit" class="btn btn-danger">Удалить</button>
-        <a href="{% url 'project_view' object.pk %}"><button type="button" class="btn btn-secondary">Отмена</button></a>
+        <a href="{% url 'product_view' product.pk %}"><button type="button" class="btn btn-secondary">Отмена</button></a>
     </form>
 {% endblock %}

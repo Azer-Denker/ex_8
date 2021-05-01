@@ -36,21 +36,20 @@ class RegisterView(CreateView):
         return next_url
 
 
-class UserDetailView(LoginRequiredMixin, DetailView):
+class UserDetailView(DetailView):
     model = get_user_model()
     template_name = 'user_detail.html'
     context_object_name = 'user_obj'
 
-    def get_context_data(self, **kwargs):
-        kwargs['projects'] = kwargs['object'].projects.all()
-        return super().get_context_data(**kwargs)
+    # def get_context_data(self, **kwargs):
+    #     kwargs['products'] = kwargs['object'].products.all()
+    #     return super().get_context_data(**kwargs)
 
 
-class WatchUsersView(PermissionRequiredMixin, ListView):
+class WatchUsersView(ListView):
     template_name = 'users_list.html'
     model = get_user_model()
     context_object_name = 'profiles'
-    permission_required = 'accounts.can_watch_users'
 
 
 class UserChangeView(LoginRequiredMixin, UpdateView):

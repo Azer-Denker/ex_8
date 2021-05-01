@@ -2,13 +2,9 @@
 
 {% block title %}Update{% endblock %}
 
-{% block menu %}
-    <li><a href="{% url 'tipe_view' tipe.pk %}">Отмена</a></li>
-{% endblock %}
-
 {% block content %}
-    <h1>Update Tipe</h1>
+    <h1>Update Review</h1>
 
-    {% url "tipe_update" pk=tipe.pk as action_url %}
+    {% url "review_update" pk=review.pk as action_url %}
     {% include 'partial/form.html' with action_url=action_url form_method='post' button_text='Update' %}
 {% endblock %}

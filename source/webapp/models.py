@@ -1,75 +1,55 @@
 from django.contrib.auth import get_user_model
-from django.core.validators import MinLengthValidator
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
-from django.utils import timezone
 from django.contrib.auth.models import User
+from django.utils import timezone
 
-STATUS_CHOICES = [
-    ('new', 'новый'),
-    ('In Progress', 'в процессе'),
-    ('Done', 'выполнено')
-]
-
-
-class Tipe(models.Model):
-    project_pk = models.ForeignKey('webapp.Project', related_name='projects', on_delete=models.CASCADE,
-                                   verbose_name='Проект')
-    title = models.CharField(max_length=200, null=False, blank=False, verbose_name='Заголовок',
-                             validators=[MinLengthValidator(5)])
-    text = models.TextField(max_length=3000, null=False, blank=False, verbose_name='Текст')
-    author = models.ForeignKey(get_user_model(), on_delete=models.SET_DEFAULT, default=1, related_name='project',
-                               verbose_name='Автор')
-    status = models.ForeignKey('webapp.Status', related_name='status', on_delete=models.PROTECT, verbose_name='Статус')
-    tags = models.ManyToManyField('webapp.Tag', verbose_name='Теги', blank=True, related_name='tags')
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
-    updated_at = models.DateTimeField(auto_now=True, verbose_name='Время изменения')
-    publish_at = models.DateTimeField(verbose_name="Время публикации", blank=True, default=timezone.now)
-
-    def save(self, **kwargs):
-        if not self.publish_at:
-            if not self.pk:
-                self.publish_at = timezone.now()
-            else:
-                self.publish_at = Tipe.objects.get(pk=self.pk).publish_at
-        super().save(**kwargs)
-
-    def __str__(self):
-        return "{}. {}".format(self.pk, self.title)
-
-    class Meta:
-        verbose_name = 'Статья'
-        verbose_name_plural = 'Статьи'
+CATEGORY_CHOICES = (
+    ('Other', 'Разное'),
+    ('Food', 'Продукты питания'),
+    ('Household', 'Хозяйство'),
+    ('Toys', 'Игрушки'),
+    ('Appliances', 'Бытовая Техника')
+)
 
 
-class Status(models.Model):
-    name = models.CharField(max_length=15, verbose_name='Статус')
-
-    def __str__(self):
-        return self.name
-
-
-class Tag(models.Model):
-    name = models.CharField(max_length=31, verbose_name='Тег')
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
-
-    def __str__(self):
-        return self.name
-
-
-class Project(models.Model):
-    start_date = models.DateField(null=False, blank=False, verbose_name='Дата начала')
-    finish_date = models.DateField(null=True, blank=True, verbose_name='Дата окончания')
+class Product(models.Model):
     name = models.CharField(max_length=200, null=False, blank=False, verbose_name='Название')
+    category = models.CharField(max_length=50, choices=CATEGORY_CHOICES, verbose_name='Категория')
     description = models.TextField(max_length=3000, null=True, blank=True, verbose_name='Описание')
-    project_team = models.ManyToManyField(User, related_name='projects', verbose_name='Команда')
-    is_deleted = models.BooleanField(default=False)
+    pic = models.ImageField(null=True, blank=True, upload_to='product_pic', verbose_name='Картинка')
 
     def __str__(self):
         return "{}. {}".format(self.pk, self.name)
 
+    def get_mark(self):
+        total = 0
+        reviews = Review.objects.filter(product=self.pk)
+        if reviews.count():
+            for x in reviews.filter(status=True):
+                total += int(x.mark)
+            try:
+                total = total / reviews.filter(status=True).count()
+            except ZeroDivisionError:
+                total = 0
+        return round(total, 1)
+
     class Meta:
-        verbose_name = 'Проект'
-        verbose_name_plural = 'Проекты'
-        permissions = [
-            ('add_user_in_project', 'Добавить пользователя в проект')
-        ]
+        verbose_name = 'Товар'
+        verbose_name_plural = 'Товары'
+
+
+class Review(models.Model):
+    author = models.ForeignKey(get_user_model(), on_delete=models.SET_DEFAULT, default=1, related_name='product',
+                               verbose_name='Автор')
+    product = models.ForeignKey('webapp.Product', related_name='product_review', on_delete=models.CASCADE,
+                                verbose_name='Товар')
+    text = models.TextField(max_length=3000, null=False, blank=False, verbose_name='Текст отзыва')
+    mark = models.IntegerField(verbose_name='Оценка', validators=[MinValueValidator(0), MaxValueValidator(5)])
+    status = models.BooleanField(default=False, verbose_name="Статус")
+    created_at = models.DateTimeField(default=timezone.now, verbose_name='Время создания')
+    updated_at = models.DateTimeField(default=timezone.now, verbose_name='Время изменения')
+
+    class Meta:
+        verbose_name = 'Отзыв'
+        verbose_name_plural = 'Отзывы'
